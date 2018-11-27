@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 contract Voting {
 
     struct Candidate {
-        bytes32 name;
+        string name;
         uint16 party;
         uint32 voteCount;
     }
@@ -25,7 +25,7 @@ contract Voting {
         whiteList[_address] = 999;
     }
 
-    function addCandidate(bytes32 _name, uint8 _party) public {
+    function addCandidate(string memory _name, uint8 _party) public {
         require(validTimeToAdd());
         require(0 < _party);
         require(100 > _party);
@@ -79,5 +79,3 @@ contract Voting {
     }
 
 }
-
-
