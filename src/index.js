@@ -1,8 +1,229 @@
 (() => {
-  const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  const interface = JSON.parse(YOUR_CONTRACT_INTERFACE);
+  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+  const interface = ([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_party",
+				"type": "uint8"
+			}
+		],
+		"name": "addCandidate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "addToWhiteList",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_initTime",
+				"type": "uint256"
+			},
+			{
+				"name": "_durationTime",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "candidate",
+				"type": "uint16"
+			}
+		],
+		"name": "voteForCandidate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"name": "candidates",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "party",
+				"type": "uint16"
+			},
+			{
+				"name": "voteCount",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "durationTimeMin",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "initTime",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "candidate",
+				"type": "uint16"
+			}
+		],
+		"name": "totalVotesFor",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "candidate",
+				"type": "uint16"
+			}
+		],
+		"name": "validCandidate",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "validTime",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "validTimeToAdd",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "voter",
+				"type": "address"
+			}
+		],
+		"name": "validVoter",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "whiteList",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
   const VotingContract = web3.eth.contract(interface);
-  const contractInstance = VotingContract.at('0x438a3b5241fc0fe21fed97751dcc53347747b8c6');
+  const contractInstance = VotingContract.at('0xf1601ff476580aaa4540bdc23314fc0ae2b207cc');
 
   web3.personal.unlockAccount(web3.eth.accounts[0], '123qwe', 0);
 
