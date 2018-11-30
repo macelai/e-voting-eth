@@ -14,12 +14,12 @@ contract Voting {
     mapping (address => uint16) public whiteList;
     // Timestamp
     uint public initTime;
-    uint public durationTimeMin;
+    uint public finalTime;
     
-    constructor(uint _initTime, uint _durationTime) public {
+    constructor(uint _initTime, uint _finalTime) public {
         owner = msg.sender;
         initTime = _initTime;
-        durationTimeMin = _durationTime;
+        finalTime = _finalTime;
     }
     
     modifier onlyOwner() {
@@ -80,7 +80,7 @@ contract Voting {
     }
     
     function validTime() public view returns (bool) {
-        if (now < initTime + durationTimeMin) {
+        if (now <=  finalTime && now >= initTime) {
             return true;
         }
         return false;
