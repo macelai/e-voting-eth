@@ -223,7 +223,7 @@
 	}
 ]);
   const VotingContract = web3.eth.contract(interface);
-  const contractInstance = VotingContract.at('0xf1601ff476580aaa4540bdc23314fc0ae2b207cc');
+  const contractInstance = VotingContract.at('0x3adec93904ac5469b2225bb7d97f934aaa295640');
 
   web3.personal.unlockAccount(web3.eth.accounts[0], '123qwe', 0);
 
